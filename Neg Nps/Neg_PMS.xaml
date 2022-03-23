@@ -1,11 +1,19 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Breakdown" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Breakdown" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="Out_NpsStatus" Type="OutArgument(x:String)" />
+    <x:Property Name="In_Rems2Star" Type="InArgument(x:String)" />
+    <x:Property Name="In_lowRateRems" Type="InArgument(x:String)" />
   </x:Members>
+  <this:Breakdown.In_Rems2Star>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Breakdown.In_Rems2Star>
+  <this:Breakdown.In_lowRateRems>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Breakdown.In_lowRateRems>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>710,3101</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>710,2479</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Breakdown_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -66,19 +74,19 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Breakdown" sap:VirtualizedContainerService.HintSize="477,3036" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Breakdown" sap:VirtualizedContainerService.HintSize="477,2414" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="Attach Browser 'msedge.exe Welcome'" sap:VirtualizedContainerService.HintSize="435,2944" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f28d7851173be481315fbbd755e25b6e" Selector="&lt;html app='msedge.exe' title='Welcome To Voltas' /&gt;">
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="Attach Browser 'msedge.exe Welcome'" sap:VirtualizedContainerService.HintSize="435,2322" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f28d7851173be481315fbbd755e25b6e" Selector="&lt;html app='msedge.exe' title='Welcome To Voltas' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="401,2798" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="401,2176" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="Remarks" />
               <Variable x:TypeArguments="s:String[]" Name="RemarksArray" />
@@ -225,11 +233,14 @@
                 </ui:Target>
               </ui:Click.Target>
             </ui:Click>
-            <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="2StrRems" DisplayName="Get Asset" FolderPath="Shared/VoltasNps" sap:VirtualizedContainerService.HintSize="359,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
-              <ui:GetRobotAsset.Value>
+            <Assign sap:VirtualizedContainerService.HintSize="359,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[Rems2Star]</OutArgument>
-              </ui:GetRobotAsset.Value>
-            </ui:GetRobotAsset>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[In_Rems2Star]</InArgument>
+              </Assign.Value>
+            </Assign>
             <Assign DisplayName="All Rems To array" sap:VirtualizedContainerService.HintSize="359,60" sap2010:WorkflowViewState.IdRef="Assign_5">
               <Assign.To>
                 <OutArgument x:TypeArguments="s:String[]">[Rems2strArray]</OutArgument>
@@ -282,11 +293,14 @@
                 </ui:Target>
               </ui:Click.Target>
             </ui:Click>
-            <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="lowRateRems" DisplayName="Get Asset" FolderPath="Shared/VoltasNps" sap:VirtualizedContainerService.HintSize="359,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_4">
-              <ui:GetRobotAsset.Value>
+            <Assign sap:VirtualizedContainerService.HintSize="359,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[lowRateRems]</OutArgument>
-              </ui:GetRobotAsset.Value>
-            </ui:GetRobotAsset>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[In_lowRateRems]</InArgument>
+              </Assign.Value>
+            </Assign>
             <Assign DisplayName="Low Rate Rems" sap:VirtualizedContainerService.HintSize="359,60" sap2010:WorkflowViewState.IdRef="Assign_6">
               <Assign.To>
                 <OutArgument x:TypeArguments="s:String[]">[lowRateremArray]</OutArgument>
@@ -323,56 +337,6 @@
                 </ui:Target>
               </ui:SelectItem.Target>
             </ui:SelectItem>
-            <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="GoodRemarks" DisplayName="Get Asset" FolderPath="Shared/VoltasNps" sap:VirtualizedContainerService.HintSize="359,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
-              <ui:GetRobotAsset.Value>
-                <OutArgument x:TypeArguments="x:String">[Remarks]</OutArgument>
-              </ui:GetRobotAsset.Value>
-            </ui:GetRobotAsset>
-            <Assign DisplayName="Remarks Array" sap:VirtualizedContainerService.HintSize="359,60" sap2010:WorkflowViewState.IdRef="Assign_4">
-              <Assign.To>
-                <OutArgument x:TypeArguments="s:String[]">[RemarksArray]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="s:String[]">[Remarks.Split(","c).ToArray]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign DisplayName="rand Remark" sap:VirtualizedContainerService.HintSize="359,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[randRemark]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[RemarksArray(New Random().Next(RemarksArray.Length))]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="359,51" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-              <ui:CommentOut.Body>
-                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_3">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Type Into 'TEXTAREA  remarksbreak'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" SimulateType="True" Text="[randRemark]">
-                    <ui:TypeInto.Target>
-                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="12e837e2-7e0d-48dd-bc3a-e5095240e2c0" InformativeScreenshot="a8dc01724649a17fce1be016457e929c" Selector="&lt;webctrl tag='TEXTAREA' id='remarksbreak' name='remarksbreak' /&gt;">
-                        <ui:Target.TimeoutMS>
-                          <InArgument x:TypeArguments="x:Int32" />
-                        </ui:Target.TimeoutMS>
-                        <ui:Target.WaitForReady>
-                          <InArgument x:TypeArguments="ui:WaitForReady" />
-                        </ui:Target.WaitForReady>
-                      </ui:Target>
-                    </ui:TypeInto.Target>
-                  </ui:TypeInto>
-                </Sequence>
-              </ui:CommentOut.Body>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:CommentOut>
             <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'BUTTON  submit'" sap:VirtualizedContainerService.HintSize="359,106" sap2010:WorkflowViewState.IdRef="Click_8" KeyModifiers="None" MouseButton="BTN_LEFT">
               <ui:Click.CursorPosition>
                 <ui:CursorPosition Position="Center">
